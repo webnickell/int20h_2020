@@ -132,12 +132,18 @@ class _$ArEventDataCopyWithImpl<$Res> extends _$ArEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ArEventData implements ArEventData {
+class _$ArEventData with DiagnosticableTreeMixin implements ArEventData {
   const _$ArEventData();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ArEvent()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ArEvent'));
   }
 
   @override
@@ -256,15 +262,23 @@ class _$ArEventAddViewCopyWithImpl<$Res> extends _$ArEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ArEventAddView implements ArEventAddView {
+class _$ArEventAddView with DiagnosticableTreeMixin implements ArEventAddView {
   const _$ArEventAddView(this.arView) : assert(arView != null);
 
   @override
   final ArView arView;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ArEvent.addView(arView: $arView)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ArEvent.addView'))
+      ..add(DiagnosticsProperty('arView', arView));
   }
 
   @override
@@ -386,12 +400,20 @@ class _$ArEventRemoveViewCopyWithImpl<$Res> extends _$ArEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ArEventRemoveView implements ArEventRemoveView {
+class _$ArEventRemoveView
+    with DiagnosticableTreeMixin
+    implements ArEventRemoveView {
   const _$ArEventRemoveView();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ArEvent.removeView()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ArEvent.removeView'));
   }
 
   @override
@@ -511,15 +533,25 @@ class _$ArEventSetUserLocationCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ArEventSetUserLocation implements ArEventSetUserLocation {
+class _$ArEventSetUserLocation
+    with DiagnosticableTreeMixin
+    implements ArEventSetUserLocation {
   const _$ArEventSetUserLocation(this.location) : assert(location != null);
 
   @override
   final LocationData location;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ArEvent.setUserLocation(location: $location)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ArEvent.setUserLocation'))
+      ..add(DiagnosticsProperty('location', location));
   }
 
   @override
@@ -656,15 +688,25 @@ class _$ArEventSetDriverLocationCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ArEventSetDriverLocation implements ArEventSetDriverLocation {
+class _$ArEventSetDriverLocation
+    with DiagnosticableTreeMixin
+    implements ArEventSetDriverLocation {
   const _$ArEventSetDriverLocation(this.location) : assert(location != null);
 
   @override
   final LocationData location;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ArEvent.setDriverLocation(location: $location)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ArEvent.setDriverLocation'))
+      ..add(DiagnosticsProperty('location', location));
   }
 
   @override
@@ -800,15 +842,25 @@ class _$ArEventAddTrackImageCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ArEventAddTrackImage implements ArEventAddTrackImage {
+class _$ArEventAddTrackImage
+    with DiagnosticableTreeMixin
+    implements ArEventAddTrackImage {
   const _$ArEventAddTrackImage(this.image) : assert(image != null);
 
   @override
   final ArCoreAugmentedImage image;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ArEvent.addTrackImage(image: $image)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ArEvent.addTrackImage'))
+      ..add(DiagnosticsProperty('image', image));
   }
 
   @override
@@ -964,12 +1016,18 @@ class _$ArStateDataCopyWithImpl<$Res> extends _$ArStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ArStateData implements ArStateData {
+class _$ArStateData with DiagnosticableTreeMixin implements ArStateData {
   const _$ArStateData();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ArState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ArState'));
   }
 
   @override
