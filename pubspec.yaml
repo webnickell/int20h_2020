@@ -19,6 +19,7 @@ dependencies:
   google_maps_flutter: ^1.2.0
   geodesy: ^0.3.2
   cupertino_icons: ^1.0.0
+  flutter_svg: ^0.18.0
 
 dev_dependencies:
   freezed: ^0.12.7
@@ -33,3 +34,4 @@ flutter:
   assets:
     - assets/models/
     - assets/images/
+    - assets/icons/
