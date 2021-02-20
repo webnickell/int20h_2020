@@ -31,13 +31,24 @@ class _$ArEventTearOff {
   }
 
 // ignore: unused_element
-  ArEventError error() {
-    return const ArEventError();
+  ArEventSetUserLocation setUserLocation(LocationData location) {
+    return ArEventSetUserLocation(
+      location,
+    );
   }
 
 // ignore: unused_element
-  ArEventSetCube setCube() {
-    return const ArEventSetCube();
+  ArEventSetDriverLocation setDriverLocation(LocationData location) {
+    return ArEventSetDriverLocation(
+      location,
+    );
+  }
+
+// ignore: unused_element
+  ArEventAddTrackImage addTrackImage(ArCoreAugmentedImage image) {
+    return ArEventAddTrackImage(
+      image,
+    );
   }
 }
 
@@ -52,16 +63,18 @@ mixin _$ArEvent {
     TResult $default(), {
     @required TResult addView(ArView arView),
     @required TResult removeView(),
-    @required TResult error(),
-    @required TResult setCube(),
+    @required TResult setUserLocation(LocationData location),
+    @required TResult setDriverLocation(LocationData location),
+    @required TResult addTrackImage(ArCoreAugmentedImage image),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>(
     TResult $default(), {
     TResult addView(ArView arView),
     TResult removeView(),
-    TResult error(),
-    TResult setCube(),
+    TResult setUserLocation(LocationData location),
+    TResult setDriverLocation(LocationData location),
+    TResult addTrackImage(ArCoreAugmentedImage image),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -69,16 +82,18 @@ mixin _$ArEvent {
     TResult $default(ArEventData value), {
     @required TResult addView(ArEventAddView value),
     @required TResult removeView(ArEventRemoveView value),
-    @required TResult error(ArEventError value),
-    @required TResult setCube(ArEventSetCube value),
+    @required TResult setUserLocation(ArEventSetUserLocation value),
+    @required TResult setDriverLocation(ArEventSetDriverLocation value),
+    @required TResult addTrackImage(ArEventAddTrackImage value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>(
     TResult $default(ArEventData value), {
     TResult addView(ArEventAddView value),
     TResult removeView(ArEventRemoveView value),
-    TResult error(ArEventError value),
-    TResult setCube(ArEventSetCube value),
+    TResult setUserLocation(ArEventSetUserLocation value),
+    TResult setDriverLocation(ArEventSetDriverLocation value),
+    TResult addTrackImage(ArEventAddTrackImage value),
     @required TResult orElse(),
   });
 }
@@ -139,14 +154,16 @@ class _$ArEventData implements ArEventData {
     TResult $default(), {
     @required TResult addView(ArView arView),
     @required TResult removeView(),
-    @required TResult error(),
-    @required TResult setCube(),
+    @required TResult setUserLocation(LocationData location),
+    @required TResult setDriverLocation(LocationData location),
+    @required TResult addTrackImage(ArCoreAugmentedImage image),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
     return $default();
   }
 
@@ -156,8 +173,9 @@ class _$ArEventData implements ArEventData {
     TResult $default(), {
     TResult addView(ArView arView),
     TResult removeView(),
-    TResult error(),
-    TResult setCube(),
+    TResult setUserLocation(LocationData location),
+    TResult setDriverLocation(LocationData location),
+    TResult addTrackImage(ArCoreAugmentedImage image),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -173,14 +191,16 @@ class _$ArEventData implements ArEventData {
     TResult $default(ArEventData value), {
     @required TResult addView(ArEventAddView value),
     @required TResult removeView(ArEventRemoveView value),
-    @required TResult error(ArEventError value),
-    @required TResult setCube(ArEventSetCube value),
+    @required TResult setUserLocation(ArEventSetUserLocation value),
+    @required TResult setDriverLocation(ArEventSetDriverLocation value),
+    @required TResult addTrackImage(ArEventAddTrackImage value),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
     return $default(this);
   }
 
@@ -190,8 +210,9 @@ class _$ArEventData implements ArEventData {
     TResult $default(ArEventData value), {
     TResult addView(ArEventAddView value),
     TResult removeView(ArEventRemoveView value),
-    TResult error(ArEventError value),
-    TResult setCube(ArEventSetCube value),
+    TResult setUserLocation(ArEventSetUserLocation value),
+    TResult setDriverLocation(ArEventSetDriverLocation value),
+    TResult addTrackImage(ArEventAddTrackImage value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -269,14 +290,16 @@ class _$ArEventAddView implements ArEventAddView {
     TResult $default(), {
     @required TResult addView(ArView arView),
     @required TResult removeView(),
-    @required TResult error(),
-    @required TResult setCube(),
+    @required TResult setUserLocation(LocationData location),
+    @required TResult setDriverLocation(LocationData location),
+    @required TResult addTrackImage(ArCoreAugmentedImage image),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
     return addView(arView);
   }
 
@@ -286,8 +309,9 @@ class _$ArEventAddView implements ArEventAddView {
     TResult $default(), {
     TResult addView(ArView arView),
     TResult removeView(),
-    TResult error(),
-    TResult setCube(),
+    TResult setUserLocation(LocationData location),
+    TResult setDriverLocation(LocationData location),
+    TResult addTrackImage(ArCoreAugmentedImage image),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -303,14 +327,16 @@ class _$ArEventAddView implements ArEventAddView {
     TResult $default(ArEventData value), {
     @required TResult addView(ArEventAddView value),
     @required TResult removeView(ArEventRemoveView value),
-    @required TResult error(ArEventError value),
-    @required TResult setCube(ArEventSetCube value),
+    @required TResult setUserLocation(ArEventSetUserLocation value),
+    @required TResult setDriverLocation(ArEventSetDriverLocation value),
+    @required TResult addTrackImage(ArEventAddTrackImage value),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
     return addView(this);
   }
 
@@ -320,8 +346,9 @@ class _$ArEventAddView implements ArEventAddView {
     TResult $default(ArEventData value), {
     TResult addView(ArEventAddView value),
     TResult removeView(ArEventRemoveView value),
-    TResult error(ArEventError value),
-    TResult setCube(ArEventSetCube value),
+    TResult setUserLocation(ArEventSetUserLocation value),
+    TResult setDriverLocation(ArEventSetDriverLocation value),
+    TResult addTrackImage(ArEventAddTrackImage value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -381,14 +408,16 @@ class _$ArEventRemoveView implements ArEventRemoveView {
     TResult $default(), {
     @required TResult addView(ArView arView),
     @required TResult removeView(),
-    @required TResult error(),
-    @required TResult setCube(),
+    @required TResult setUserLocation(LocationData location),
+    @required TResult setDriverLocation(LocationData location),
+    @required TResult addTrackImage(ArCoreAugmentedImage image),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
     return removeView();
   }
 
@@ -398,8 +427,9 @@ class _$ArEventRemoveView implements ArEventRemoveView {
     TResult $default(), {
     TResult addView(ArView arView),
     TResult removeView(),
-    TResult error(),
-    TResult setCube(),
+    TResult setUserLocation(LocationData location),
+    TResult setDriverLocation(LocationData location),
+    TResult addTrackImage(ArCoreAugmentedImage image),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -415,14 +445,16 @@ class _$ArEventRemoveView implements ArEventRemoveView {
     TResult $default(ArEventData value), {
     @required TResult addView(ArEventAddView value),
     @required TResult removeView(ArEventRemoveView value),
-    @required TResult error(ArEventError value),
-    @required TResult setCube(ArEventSetCube value),
+    @required TResult setUserLocation(ArEventSetUserLocation value),
+    @required TResult setDriverLocation(ArEventSetDriverLocation value),
+    @required TResult addTrackImage(ArEventAddTrackImage value),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
     return removeView(this);
   }
 
@@ -432,8 +464,9 @@ class _$ArEventRemoveView implements ArEventRemoveView {
     TResult $default(ArEventData value), {
     TResult addView(ArEventAddView value),
     TResult removeView(ArEventRemoveView value),
-    TResult error(ArEventError value),
-    TResult setCube(ArEventSetCube value),
+    TResult setUserLocation(ArEventSetUserLocation value),
+    TResult setDriverLocation(ArEventSetDriverLocation value),
+    TResult addTrackImage(ArEventAddTrackImage value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -449,39 +482,64 @@ abstract class ArEventRemoveView implements ArEvent {
 }
 
 /// @nodoc
-abstract class $ArEventErrorCopyWith<$Res> {
-  factory $ArEventErrorCopyWith(
-          ArEventError value, $Res Function(ArEventError) then) =
-      _$ArEventErrorCopyWithImpl<$Res>;
+abstract class $ArEventSetUserLocationCopyWith<$Res> {
+  factory $ArEventSetUserLocationCopyWith(ArEventSetUserLocation value,
+          $Res Function(ArEventSetUserLocation) then) =
+      _$ArEventSetUserLocationCopyWithImpl<$Res>;
+  $Res call({LocationData location});
 }
 
 /// @nodoc
-class _$ArEventErrorCopyWithImpl<$Res> extends _$ArEventCopyWithImpl<$Res>
-    implements $ArEventErrorCopyWith<$Res> {
-  _$ArEventErrorCopyWithImpl(
-      ArEventError _value, $Res Function(ArEventError) _then)
-      : super(_value, (v) => _then(v as ArEventError));
+class _$ArEventSetUserLocationCopyWithImpl<$Res>
+    extends _$ArEventCopyWithImpl<$Res>
+    implements $ArEventSetUserLocationCopyWith<$Res> {
+  _$ArEventSetUserLocationCopyWithImpl(ArEventSetUserLocation _value,
+      $Res Function(ArEventSetUserLocation) _then)
+      : super(_value, (v) => _then(v as ArEventSetUserLocation));
 
   @override
-  ArEventError get _value => super._value as ArEventError;
+  ArEventSetUserLocation get _value => super._value as ArEventSetUserLocation;
+
+  @override
+  $Res call({
+    Object location = freezed,
+  }) {
+    return _then(ArEventSetUserLocation(
+      location == freezed ? _value.location : location as LocationData,
+    ));
+  }
 }
 
 /// @nodoc
-class _$ArEventError implements ArEventError {
-  const _$ArEventError();
+class _$ArEventSetUserLocation implements ArEventSetUserLocation {
+  const _$ArEventSetUserLocation(this.location) : assert(location != null);
+
+  @override
+  final LocationData location;
 
   @override
   String toString() {
-    return 'ArEvent.error()';
+    return 'ArEvent.setUserLocation(location: $location)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is ArEventError);
+    return identical(this, other) ||
+        (other is ArEventSetUserLocation &&
+            (identical(other.location, location) ||
+                const DeepCollectionEquality()
+                    .equals(other.location, location)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(location);
+
+  @JsonKey(ignore: true)
+  @override
+  $ArEventSetUserLocationCopyWith<ArEventSetUserLocation> get copyWith =>
+      _$ArEventSetUserLocationCopyWithImpl<ArEventSetUserLocation>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -489,15 +547,17 @@ class _$ArEventError implements ArEventError {
     TResult $default(), {
     @required TResult addView(ArView arView),
     @required TResult removeView(),
-    @required TResult error(),
-    @required TResult setCube(),
+    @required TResult setUserLocation(LocationData location),
+    @required TResult setDriverLocation(LocationData location),
+    @required TResult addTrackImage(ArCoreAugmentedImage image),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
-    return error();
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
+    return setUserLocation(location);
   }
 
   @override
@@ -506,13 +566,14 @@ class _$ArEventError implements ArEventError {
     TResult $default(), {
     TResult addView(ArView arView),
     TResult removeView(),
-    TResult error(),
-    TResult setCube(),
+    TResult setUserLocation(LocationData location),
+    TResult setDriverLocation(LocationData location),
+    TResult addTrackImage(ArCoreAugmentedImage image),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (error != null) {
-      return error();
+    if (setUserLocation != null) {
+      return setUserLocation(location);
     }
     return orElse();
   }
@@ -523,15 +584,17 @@ class _$ArEventError implements ArEventError {
     TResult $default(ArEventData value), {
     @required TResult addView(ArEventAddView value),
     @required TResult removeView(ArEventRemoveView value),
-    @required TResult error(ArEventError value),
-    @required TResult setCube(ArEventSetCube value),
+    @required TResult setUserLocation(ArEventSetUserLocation value),
+    @required TResult setDriverLocation(ArEventSetDriverLocation value),
+    @required TResult addTrackImage(ArEventAddTrackImage value),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
-    return error(this);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
+    return setUserLocation(this);
   }
 
   @override
@@ -540,56 +603,88 @@ class _$ArEventError implements ArEventError {
     TResult $default(ArEventData value), {
     TResult addView(ArEventAddView value),
     TResult removeView(ArEventRemoveView value),
-    TResult error(ArEventError value),
-    TResult setCube(ArEventSetCube value),
+    TResult setUserLocation(ArEventSetUserLocation value),
+    TResult setDriverLocation(ArEventSetDriverLocation value),
+    TResult addTrackImage(ArEventAddTrackImage value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (error != null) {
-      return error(this);
+    if (setUserLocation != null) {
+      return setUserLocation(this);
     }
     return orElse();
   }
 }
 
-abstract class ArEventError implements ArEvent {
-  const factory ArEventError() = _$ArEventError;
+abstract class ArEventSetUserLocation implements ArEvent {
+  const factory ArEventSetUserLocation(LocationData location) =
+      _$ArEventSetUserLocation;
+
+  LocationData get location;
+  @JsonKey(ignore: true)
+  $ArEventSetUserLocationCopyWith<ArEventSetUserLocation> get copyWith;
 }
 
 /// @nodoc
-abstract class $ArEventSetCubeCopyWith<$Res> {
-  factory $ArEventSetCubeCopyWith(
-          ArEventSetCube value, $Res Function(ArEventSetCube) then) =
-      _$ArEventSetCubeCopyWithImpl<$Res>;
+abstract class $ArEventSetDriverLocationCopyWith<$Res> {
+  factory $ArEventSetDriverLocationCopyWith(ArEventSetDriverLocation value,
+          $Res Function(ArEventSetDriverLocation) then) =
+      _$ArEventSetDriverLocationCopyWithImpl<$Res>;
+  $Res call({LocationData location});
 }
 
 /// @nodoc
-class _$ArEventSetCubeCopyWithImpl<$Res> extends _$ArEventCopyWithImpl<$Res>
-    implements $ArEventSetCubeCopyWith<$Res> {
-  _$ArEventSetCubeCopyWithImpl(
-      ArEventSetCube _value, $Res Function(ArEventSetCube) _then)
-      : super(_value, (v) => _then(v as ArEventSetCube));
+class _$ArEventSetDriverLocationCopyWithImpl<$Res>
+    extends _$ArEventCopyWithImpl<$Res>
+    implements $ArEventSetDriverLocationCopyWith<$Res> {
+  _$ArEventSetDriverLocationCopyWithImpl(ArEventSetDriverLocation _value,
+      $Res Function(ArEventSetDriverLocation) _then)
+      : super(_value, (v) => _then(v as ArEventSetDriverLocation));
 
   @override
-  ArEventSetCube get _value => super._value as ArEventSetCube;
+  ArEventSetDriverLocation get _value =>
+      super._value as ArEventSetDriverLocation;
+
+  @override
+  $Res call({
+    Object location = freezed,
+  }) {
+    return _then(ArEventSetDriverLocation(
+      location == freezed ? _value.location : location as LocationData,
+    ));
+  }
 }
 
 /// @nodoc
-class _$ArEventSetCube implements ArEventSetCube {
-  const _$ArEventSetCube();
+class _$ArEventSetDriverLocation implements ArEventSetDriverLocation {
+  const _$ArEventSetDriverLocation(this.location) : assert(location != null);
+
+  @override
+  final LocationData location;
 
   @override
   String toString() {
-    return 'ArEvent.setCube()';
+    return 'ArEvent.setDriverLocation(location: $location)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is ArEventSetCube);
+    return identical(this, other) ||
+        (other is ArEventSetDriverLocation &&
+            (identical(other.location, location) ||
+                const DeepCollectionEquality()
+                    .equals(other.location, location)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(location);
+
+  @JsonKey(ignore: true)
+  @override
+  $ArEventSetDriverLocationCopyWith<ArEventSetDriverLocation> get copyWith =>
+      _$ArEventSetDriverLocationCopyWithImpl<ArEventSetDriverLocation>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -597,15 +692,17 @@ class _$ArEventSetCube implements ArEventSetCube {
     TResult $default(), {
     @required TResult addView(ArView arView),
     @required TResult removeView(),
-    @required TResult error(),
-    @required TResult setCube(),
+    @required TResult setUserLocation(LocationData location),
+    @required TResult setDriverLocation(LocationData location),
+    @required TResult addTrackImage(ArCoreAugmentedImage image),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
-    return setCube();
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
+    return setDriverLocation(location);
   }
 
   @override
@@ -614,13 +711,14 @@ class _$ArEventSetCube implements ArEventSetCube {
     TResult $default(), {
     TResult addView(ArView arView),
     TResult removeView(),
-    TResult error(),
-    TResult setCube(),
+    TResult setUserLocation(LocationData location),
+    TResult setDriverLocation(LocationData location),
+    TResult addTrackImage(ArCoreAugmentedImage image),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (setCube != null) {
-      return setCube();
+    if (setDriverLocation != null) {
+      return setDriverLocation(location);
     }
     return orElse();
   }
@@ -631,15 +729,17 @@ class _$ArEventSetCube implements ArEventSetCube {
     TResult $default(ArEventData value), {
     @required TResult addView(ArEventAddView value),
     @required TResult removeView(ArEventRemoveView value),
-    @required TResult error(ArEventError value),
-    @required TResult setCube(ArEventSetCube value),
+    @required TResult setUserLocation(ArEventSetUserLocation value),
+    @required TResult setDriverLocation(ArEventSetDriverLocation value),
+    @required TResult addTrackImage(ArEventAddTrackImage value),
   }) {
     assert($default != null);
     assert(addView != null);
     assert(removeView != null);
-    assert(error != null);
-    assert(setCube != null);
-    return setCube(this);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
+    return setDriverLocation(this);
   }
 
   @override
@@ -648,20 +748,169 @@ class _$ArEventSetCube implements ArEventSetCube {
     TResult $default(ArEventData value), {
     TResult addView(ArEventAddView value),
     TResult removeView(ArEventRemoveView value),
-    TResult error(ArEventError value),
-    TResult setCube(ArEventSetCube value),
+    TResult setUserLocation(ArEventSetUserLocation value),
+    TResult setDriverLocation(ArEventSetDriverLocation value),
+    TResult addTrackImage(ArEventAddTrackImage value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (setCube != null) {
-      return setCube(this);
+    if (setDriverLocation != null) {
+      return setDriverLocation(this);
     }
     return orElse();
   }
 }
 
-abstract class ArEventSetCube implements ArEvent {
-  const factory ArEventSetCube() = _$ArEventSetCube;
+abstract class ArEventSetDriverLocation implements ArEvent {
+  const factory ArEventSetDriverLocation(LocationData location) =
+      _$ArEventSetDriverLocation;
+
+  LocationData get location;
+  @JsonKey(ignore: true)
+  $ArEventSetDriverLocationCopyWith<ArEventSetDriverLocation> get copyWith;
+}
+
+/// @nodoc
+abstract class $ArEventAddTrackImageCopyWith<$Res> {
+  factory $ArEventAddTrackImageCopyWith(ArEventAddTrackImage value,
+          $Res Function(ArEventAddTrackImage) then) =
+      _$ArEventAddTrackImageCopyWithImpl<$Res>;
+  $Res call({ArCoreAugmentedImage image});
+}
+
+/// @nodoc
+class _$ArEventAddTrackImageCopyWithImpl<$Res>
+    extends _$ArEventCopyWithImpl<$Res>
+    implements $ArEventAddTrackImageCopyWith<$Res> {
+  _$ArEventAddTrackImageCopyWithImpl(
+      ArEventAddTrackImage _value, $Res Function(ArEventAddTrackImage) _then)
+      : super(_value, (v) => _then(v as ArEventAddTrackImage));
+
+  @override
+  ArEventAddTrackImage get _value => super._value as ArEventAddTrackImage;
+
+  @override
+  $Res call({
+    Object image = freezed,
+  }) {
+    return _then(ArEventAddTrackImage(
+      image == freezed ? _value.image : image as ArCoreAugmentedImage,
+    ));
+  }
+}
+
+/// @nodoc
+class _$ArEventAddTrackImage implements ArEventAddTrackImage {
+  const _$ArEventAddTrackImage(this.image) : assert(image != null);
+
+  @override
+  final ArCoreAugmentedImage image;
+
+  @override
+  String toString() {
+    return 'ArEvent.addTrackImage(image: $image)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ArEventAddTrackImage &&
+            (identical(other.image, image) ||
+                const DeepCollectionEquality().equals(other.image, image)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(image);
+
+  @JsonKey(ignore: true)
+  @override
+  $ArEventAddTrackImageCopyWith<ArEventAddTrackImage> get copyWith =>
+      _$ArEventAddTrackImageCopyWithImpl<ArEventAddTrackImage>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>(
+    TResult $default(), {
+    @required TResult addView(ArView arView),
+    @required TResult removeView(),
+    @required TResult setUserLocation(LocationData location),
+    @required TResult setDriverLocation(LocationData location),
+    @required TResult addTrackImage(ArCoreAugmentedImage image),
+  }) {
+    assert($default != null);
+    assert(addView != null);
+    assert(removeView != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
+    return addTrackImage(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>(
+    TResult $default(), {
+    TResult addView(ArView arView),
+    TResult removeView(),
+    TResult setUserLocation(LocationData location),
+    TResult setDriverLocation(LocationData location),
+    TResult addTrackImage(ArCoreAugmentedImage image),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (addTrackImage != null) {
+      return addTrackImage(image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>(
+    TResult $default(ArEventData value), {
+    @required TResult addView(ArEventAddView value),
+    @required TResult removeView(ArEventRemoveView value),
+    @required TResult setUserLocation(ArEventSetUserLocation value),
+    @required TResult setDriverLocation(ArEventSetDriverLocation value),
+    @required TResult addTrackImage(ArEventAddTrackImage value),
+  }) {
+    assert($default != null);
+    assert(addView != null);
+    assert(removeView != null);
+    assert(setUserLocation != null);
+    assert(setDriverLocation != null);
+    assert(addTrackImage != null);
+    return addTrackImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>(
+    TResult $default(ArEventData value), {
+    TResult addView(ArEventAddView value),
+    TResult removeView(ArEventRemoveView value),
+    TResult setUserLocation(ArEventSetUserLocation value),
+    TResult setDriverLocation(ArEventSetDriverLocation value),
+    TResult addTrackImage(ArEventAddTrackImage value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (addTrackImage != null) {
+      return addTrackImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ArEventAddTrackImage implements ArEvent {
+  const factory ArEventAddTrackImage(ArCoreAugmentedImage image) =
+      _$ArEventAddTrackImage;
+
+  ArCoreAugmentedImage get image;
+  @JsonKey(ignore: true)
+  $ArEventAddTrackImageCopyWith<ArEventAddTrackImage> get copyWith;
 }
 
 /// @nodoc

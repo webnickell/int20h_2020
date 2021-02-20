@@ -1,11 +1,12 @@
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:int20h_2020/core/image_bytes_loading.dart';
 import 'package:int20h_2020/ui/bloc/ar/ar_bloc.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 abstract class ArView {
-  void setCube();
+  void setCarRecognation(vector.Vector3 position);
 }
 
 class ArPage extends StatefulWidget {
@@ -29,23 +30,19 @@ class _ArPageState extends State<ArPage> implements ArView {
   void dispose() {
     final arBloc = context.read<ArBloc>();
     arBloc.add(ArEvent.addView(this));
+
     super.dispose();
   }
 
-  void setCube() {
-    final m = ArCoreMaterial(color: Colors.red);
+  @override
+  void setCarRecognation(vector.Vector3 position) {}
 
-    final cube = ArCoreCube(
-      size: vector.Vector3.all(0.2),
-      materials: [m],
-    );
-
-    final node = ArCoreNode(
-      shape: cube,
-      position: vector.Vector3(0, 0, -2),
-    );
-
-    controller.addArCoreNode(node);
+  void _onTrackingImage(ArCoreAugmentedImage i) {
+    debugPrint('track');
+    context.read<ArBloc>().add(
+          ArEvent.addTrackImage(i),
+        );
+    return;
   }
 
   @override
@@ -55,10 +52,15 @@ class _ArPageState extends State<ArPage> implements ArView {
         title: Text('AR'),
       ),
       body: ArCoreView(
-        onArCoreViewCreated: (c) {
+        onArCoreViewCreated: (c) async {
           controller = c;
 
-          context.read<ArBloc>().add(ArEvent.setCube());
+          final imageBytes =
+              await loadAssetAsUint8List('assets/images/earth.imgdb');
+
+          await controller.loadAugmentedImagesDatabase(bytes: imageBytes);
+
+          controller.onTrackingImage = _onTrackingImage;
         },
       ),
     );
