@@ -43,9 +43,12 @@ class _LoginPageState extends State<LoginPage> {
   void _onNextPressed() {
     if (!_canSend) return;
     Navigator.pushNamed(context, Routes.confirmPhone);
+
+    final phone = _selectedPrefix + _phoneEditingController.text;
+    debugPrint('send $phone');
     context.read<AuthBloc>().add(
           AuthEvent.sendPhone(
-            _phoneEditingController.text,
+            phone,
           ),
         );
   }
@@ -104,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: NoneBorderTextField(
                       controller: _phoneEditingController,
                       placeholder: 'XXXXXXXXX',
+                      keyboardType: TextInputType.phone,
                     ),
                   ),
                   BasicButton(

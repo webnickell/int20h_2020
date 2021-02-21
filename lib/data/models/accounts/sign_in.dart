@@ -5,6 +5,7 @@ part 'sign_in.g.dart';
 
 @freezed
 abstract class SignIn with _$SignIn {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SignIn({
     int id,
     String phone,

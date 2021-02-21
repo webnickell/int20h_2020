@@ -6,6 +6,7 @@ part 'sign_in_verify.g.dart';
 
 @freezed
 abstract class SignInVerify with _$SignInVerify {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SignInVerify({
     String token,
     bool isNewUser,

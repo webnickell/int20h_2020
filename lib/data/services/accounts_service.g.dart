@@ -9,6 +9,7 @@ part of 'accounts_service.dart';
 class _AccountsService implements AccountsService {
   _AccountsService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
+    baseUrl ??= 'https://e95mates.herokuapp.com/';
   }
 
   final Dio _dio;
@@ -16,12 +17,14 @@ class _AccountsService implements AccountsService {
   String baseUrl;
 
   @override
-  Future<SignIn> signInRequest({phone}) async {
+  Future<SignIn> signInRequest({request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _data = phone;
-    final _result = await _dio.request<Map<String, dynamic>>('/sign-in-request',
+    final _data = <String, dynamic>{};
+    _data.addAll(request?.toJson() ?? <String, dynamic>{});
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/accounts/sign-in-request',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
@@ -34,12 +37,13 @@ class _AccountsService implements AccountsService {
   }
 
   @override
-  Future<SignInVerify> signInVerify({passcode, phone}) async {
+  Future<SignInVerify> signInVerify({request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _data = passcode;
-    final _result = await _dio.request<Map<String, dynamic>>('/sign-in-verify',
+    final _data = request;
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/accounts/sign-in-verify',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
@@ -56,7 +60,8 @@ class _AccountsService implements AccountsService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.request<Map<String, dynamic>>('/profile',
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/accounts/profile',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -69,12 +74,14 @@ class _AccountsService implements AccountsService {
   }
 
   @override
-  Future<Profile> putProfile({fullName}) async {
+  Future<Profile> putProfile({request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _data = fullName;
-    final _result = await _dio.request<Map<String, dynamic>>('/profile',
+    final _data = <String, dynamic>{};
+    _data.addAll(request?.toJson() ?? <String, dynamic>{});
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/accounts/profile',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'PUT',

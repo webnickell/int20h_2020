@@ -150,7 +150,9 @@ class _MapPageState extends State<MapPage> {
         },
         onTap: (location) {
           context.read<MapBloc>().add(
-                MapEvent.setTargetLocation(location),
+                MapEvent.setTargetPosition(
+                  Position.location(location),
+                ),
               );
           setState(() {
             _selectedLocation = location;

@@ -1,22 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile.dart';
+part of 'sign_in_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Profile _$_$_ProfileFromJson(Map<String, dynamic> json) {
-  return _$_Profile(
-    id: json['id'] as int,
-    fullName: json['full_name'] as String,
+_$_SignInRequest _$_$_SignInRequestFromJson(Map<String, dynamic> json) {
+  return _$_SignInRequest(
     phone: json['phone'] as String,
   );
 }
 
-Map<String, dynamic> _$_$_ProfileToJson(_$_Profile instance) =>
+Map<String, dynamic> _$_$_SignInRequestToJson(_$_SignInRequest instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'full_name': instance.fullName,
       'phone': instance.phone,
     };

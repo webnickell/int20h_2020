@@ -1,8 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:int20h_2020/data/models/accounts/profile.dart';
 import 'package:int20h_2020/data/models/accounts/sign_in_verify.dart';
 import 'package:int20h_2020/data/services/accounts_service.dart';
+import 'package:int20h_2020/main.dart';
+
+import 'package:int20h_2020/data/models/accounts_requests/put_profile_request.dart';
+import 'package:int20h_2020/data/models/accounts_requests/sign_in_request.dart';
+import 'package:int20h_2020/data/models/accounts_requests/sign_in_verify_request.dart';
 
 part 'auth_bloc.freezed.dart';
 
@@ -16,6 +23,7 @@ abstract class AuthEvent with _$AuthEvent {
 
 @freezed
 abstract class AuthState with _$AuthState {
+  const AuthState._();
   const factory AuthState.init() = AuthStateInit;
   const factory AuthState.phone(
     String phone,
@@ -25,32 +33,64 @@ abstract class AuthState with _$AuthState {
     SignInVerify verify,
   ) = AuthStateVerify;
 
-  const factory AuthState.profile(Profile profile) = AuthStateProfile;
+  const factory AuthState.profile(Profile profile, String token) =
+      AuthStateProfile;
+
+  String get token => when(
+      init: () => null,
+      phone: (p) => null,
+      verify: (v) => v.token,
+      profile: (p, token) => token);
 }
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AccountsService accountsService;
-  AuthBloc(this.accountsService) : super(AuthState.init());
+  final Dio dio;
+  AuthBloc(
+    this.accountsService,
+    this.dio,
+  ) : super(AuthState.init());
+
+  @override
+  void onChange(Change<AuthState> change) {
+    super.onChange(change);
+    final token = change.nextState.token;
+    if (token == null) return;
+    dio.interceptors.removeLast();
+    dio.interceptors.add(AuthInterceptor(token));
+  }
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
+    debugPrint('begin map');
     yield* event.when(
       sendPhone: (phone) async* {
+        debugPrint('begin send $phone');
         yield state.when(
           init: () => AuthState.phone(phone),
           phone: (phone) => AuthState.phone(phone),
           verify: null,
           profile: null,
         );
-        await accountsService.signInRequest(phone: phone);
+
+        final res = await accountsService.signInRequest(
+          request: SignInRequest(
+            phone: phone,
+          ),
+        );
+
+        debugPrint('after');
       },
       sendCode: (code) async* {
         yield* state.when(
           init: null,
           phone: (phone) async* {
+            debugPrint('begin send $code');
             final res = await accountsService.signInVerify(
-              phone: phone,
-              passcode: code,
+              request: SignInVerifyRequest(
+                phone: phone,
+                passcode: code,
+              ),
             );
             yield AuthState.verify(res);
           },
@@ -62,14 +102,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield* state.when(
           init: null,
           phone: (phone) async* {
-            await accountsService.signInRequest(phone: phone);
+            await accountsService.signInRequest(
+                request: SignInRequest(phone: phone));
           },
           verify: null,
           profile: null,
         );
       },
       setFullname: (String fullName) async* {
-        await accountsService.putProfile(fullName: fullName);
+        await accountsService.putProfile(
+            request: PutProfileRequest(fullName: fullName));
       },
     );
   }

@@ -100,7 +100,7 @@ class __$SignInCopyWithImpl<$Res> extends _$SignInCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 
 /// @nodoc
 class _$_SignIn implements _SignIn {

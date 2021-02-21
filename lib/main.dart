@@ -6,11 +6,13 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:int20h_2020/app.dart';
 import 'package:int20h_2020/core/location.dart';
 import 'package:int20h_2020/core/recorder.dart';
+import 'package:int20h_2020/data/google_directions/google_directions.dart';
 import 'package:int20h_2020/data/services/accounts_service.dart';
 import 'package:int20h_2020/data/services/locations_service.dart';
+import 'package:int20h_2020/ui/bloc/auth/auth_bloc.dart';
 import 'package:provider/provider.dart';
 
-final _developmentBaseUrl = 'http://185.128.235.167:6672/';
+final _developmentBaseUrl = 'https://e95mates.herokuapp.com/';
 
 Future<String> baseUrl() async {
   return _developmentBaseUrl;
@@ -23,60 +25,77 @@ Dio dio(String token, String baseUrl) {
     connectTimeout: 20000,
     receiveTimeout: 20000,
   );
-  dio.interceptors..add(_AuthInterceptor(token));
-  dio.interceptors;
+  dio.interceptors..add(AuthInterceptor(token));
   return dio;
 }
 
-class _AuthInterceptor extends Interceptor {
+class AuthInterceptor extends Interceptor {
   final String token;
 
-  _AuthInterceptor(this.token);
+  AuthInterceptor(this.token);
 
   @override
   Future<dynamic> onRequest(RequestOptions options) async {
     if (token != null && token.isNotEmpty) {
-      _appendAuthorizationToken(options);
+      _appendAuthorizationToken(options, token);
     }
 
     return options;
   }
 
-  void _appendAuthorizationToken(RequestOptions options) {
+  void _appendAuthorizationToken(RequestOptions options, String token) {
     options.headers = {'Authorization': 'Token $token'};
   }
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
   );
+  await run();
+}
 
+Future<void> run() async {
   final location = await getLocation();
 
   final recorder = await getRecorder();
+
+  DirectionsService.init('AIzaSyBHv9oUtC-pAi-tb1ftPLAal7VSDC9xHtI');
 
   runApp(
     MultiProvider(
       providers: [
         Provider(
-          create: (ctx) => Dio(),
+          create: (ctx) => Dio(BaseOptions(
+            baseUrl: _developmentBaseUrl,
+            connectTimeout: 20000,
+            receiveTimeout: 20000,
+          ))
+            ..interceptors.add(LogInterceptor(
+              error: true,
+            )),
         ),
         Provider(
           create: (ctx) => location,
         ),
         Provider(
-          create: (ctx) => AccountsService(ctx.read<Dio>()),
+          create: (ctx) =>
+              AccountsService(ctx.read<Dio>(), baseUrl: _developmentBaseUrl),
         ),
         Provider(
           create: (ctx) => LocationsService(ctx.read<Dio>()),
         ),
-        Provider(
+        Provider<FlutterSoundRecorder>(
           create: (ctx) => recorder,
         ),
+        Provider(
+          create: (ctx) => DirectionsService(),
+        )
       ],
       child: Int20hApp(),
     ),

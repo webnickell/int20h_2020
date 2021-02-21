@@ -105,7 +105,9 @@ class _ConfirmPhonePageState extends State<ConfirmPhonePage> {
                   ),
                   BasicButton(
                     onPressed: _onResend,
-                    text: 'ОТПРАВИТЬ ЕЩЕ РАЗ: $_seconds',
+                    text: _canResend
+                        ? 'ОТПРАВИТЬ ЕЩЕ РАЗ'
+                        : 'ОТПРАВИТЬ ЕЩЕ РАЗ: $_seconds',
                     isWhite: true,
                     isElevated: _seconds < 1,
                   ),
@@ -131,7 +133,7 @@ class _ConfirmPhonePageState extends State<ConfirmPhonePage> {
                               ),
                             ),
                         verify: (v) => Container(),
-                        profile: (p) => Container()),
+                        profile: (p, t) => Container()),
                   ),
                   AppGaps.gap16,
                   Row(

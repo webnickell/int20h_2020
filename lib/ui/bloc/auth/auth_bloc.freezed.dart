@@ -609,9 +609,10 @@ class _$AuthStateTearOff {
   }
 
 // ignore: unused_element
-  AuthStateProfile profile(Profile profile) {
+  AuthStateProfile profile(Profile profile, String token) {
     return AuthStateProfile(
       profile,
+      token,
     );
   }
 }
@@ -627,14 +628,14 @@ mixin _$AuthState {
     @required TResult init(),
     @required TResult phone(String phone),
     @required TResult verify(SignInVerify verify),
-    @required TResult profile(Profile profile),
+    @required TResult profile(Profile profile, String token),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult init(),
     TResult phone(String phone),
     TResult verify(SignInVerify verify),
-    TResult profile(Profile profile),
+    TResult profile(Profile profile, String token),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -688,8 +689,8 @@ class _$AuthStateInitCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$AuthStateInit implements AuthStateInit {
-  const _$AuthStateInit();
+class _$AuthStateInit extends AuthStateInit {
+  const _$AuthStateInit() : super._();
 
   @override
   String toString() {
@@ -710,7 +711,7 @@ class _$AuthStateInit implements AuthStateInit {
     @required TResult init(),
     @required TResult phone(String phone),
     @required TResult verify(SignInVerify verify),
-    @required TResult profile(Profile profile),
+    @required TResult profile(Profile profile, String token),
   }) {
     assert(init != null);
     assert(phone != null);
@@ -725,7 +726,7 @@ class _$AuthStateInit implements AuthStateInit {
     TResult init(),
     TResult phone(String phone),
     TResult verify(SignInVerify verify),
-    TResult profile(Profile profile),
+    TResult profile(Profile profile, String token),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -767,7 +768,8 @@ class _$AuthStateInit implements AuthStateInit {
   }
 }
 
-abstract class AuthStateInit implements AuthState {
+abstract class AuthStateInit extends AuthState {
+  const AuthStateInit._() : super._();
   const factory AuthStateInit() = _$AuthStateInit;
 }
 
@@ -800,8 +802,10 @@ class _$AuthStatePhoneCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$AuthStatePhone implements AuthStatePhone {
-  const _$AuthStatePhone(this.phone) : assert(phone != null);
+class _$AuthStatePhone extends AuthStatePhone {
+  const _$AuthStatePhone(this.phone)
+      : assert(phone != null),
+        super._();
 
   @override
   final String phone;
@@ -834,7 +838,7 @@ class _$AuthStatePhone implements AuthStatePhone {
     @required TResult init(),
     @required TResult phone(String phone),
     @required TResult verify(SignInVerify verify),
-    @required TResult profile(Profile profile),
+    @required TResult profile(Profile profile, String token),
   }) {
     assert(init != null);
     assert(phone != null);
@@ -849,7 +853,7 @@ class _$AuthStatePhone implements AuthStatePhone {
     TResult init(),
     TResult phone(String phone),
     TResult verify(SignInVerify verify),
-    TResult profile(Profile profile),
+    TResult profile(Profile profile, String token),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -891,7 +895,8 @@ class _$AuthStatePhone implements AuthStatePhone {
   }
 }
 
-abstract class AuthStatePhone implements AuthState {
+abstract class AuthStatePhone extends AuthState {
+  const AuthStatePhone._() : super._();
   const factory AuthStatePhone(String phone) = _$AuthStatePhone;
 
   String get phone;
@@ -940,8 +945,10 @@ class _$AuthStateVerifyCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$AuthStateVerify implements AuthStateVerify {
-  const _$AuthStateVerify(this.verify) : assert(verify != null);
+class _$AuthStateVerify extends AuthStateVerify {
+  const _$AuthStateVerify(this.verify)
+      : assert(verify != null),
+        super._();
 
   @override
   final SignInVerify verify;
@@ -974,7 +981,7 @@ class _$AuthStateVerify implements AuthStateVerify {
     @required TResult init(),
     @required TResult phone(String phone),
     @required TResult verify(SignInVerify verify),
-    @required TResult profile(Profile profile),
+    @required TResult profile(Profile profile, String token),
   }) {
     assert(init != null);
     assert(phone != null);
@@ -989,7 +996,7 @@ class _$AuthStateVerify implements AuthStateVerify {
     TResult init(),
     TResult phone(String phone),
     TResult verify(SignInVerify verify),
-    TResult profile(Profile profile),
+    TResult profile(Profile profile, String token),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -1031,7 +1038,8 @@ class _$AuthStateVerify implements AuthStateVerify {
   }
 }
 
-abstract class AuthStateVerify implements AuthState {
+abstract class AuthStateVerify extends AuthState {
+  const AuthStateVerify._() : super._();
   const factory AuthStateVerify(SignInVerify verify) = _$AuthStateVerify;
 
   SignInVerify get verify;
@@ -1044,7 +1052,7 @@ abstract class $AuthStateProfileCopyWith<$Res> {
   factory $AuthStateProfileCopyWith(
           AuthStateProfile value, $Res Function(AuthStateProfile) then) =
       _$AuthStateProfileCopyWithImpl<$Res>;
-  $Res call({Profile profile});
+  $Res call({Profile profile, String token});
 
   $ProfileCopyWith<$Res> get profile;
 }
@@ -1062,9 +1070,11 @@ class _$AuthStateProfileCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object profile = freezed,
+    Object token = freezed,
   }) {
     return _then(AuthStateProfile(
       profile == freezed ? _value.profile : profile as Profile,
+      token == freezed ? _value.token : token as String,
     ));
   }
 
@@ -1080,15 +1090,20 @@ class _$AuthStateProfileCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$AuthStateProfile implements AuthStateProfile {
-  const _$AuthStateProfile(this.profile) : assert(profile != null);
+class _$AuthStateProfile extends AuthStateProfile {
+  const _$AuthStateProfile(this.profile, this.token)
+      : assert(profile != null),
+        assert(token != null),
+        super._();
 
   @override
   final Profile profile;
+  @override
+  final String token;
 
   @override
   String toString() {
-    return 'AuthState.profile(profile: $profile)';
+    return 'AuthState.profile(profile: $profile, token: $token)';
   }
 
   @override
@@ -1096,12 +1111,17 @@ class _$AuthStateProfile implements AuthStateProfile {
     return identical(this, other) ||
         (other is AuthStateProfile &&
             (identical(other.profile, profile) ||
-                const DeepCollectionEquality().equals(other.profile, profile)));
+                const DeepCollectionEquality()
+                    .equals(other.profile, profile)) &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(profile);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(profile) ^
+      const DeepCollectionEquality().hash(token);
 
   @JsonKey(ignore: true)
   @override
@@ -1114,13 +1134,13 @@ class _$AuthStateProfile implements AuthStateProfile {
     @required TResult init(),
     @required TResult phone(String phone),
     @required TResult verify(SignInVerify verify),
-    @required TResult profile(Profile profile),
+    @required TResult profile(Profile profile, String token),
   }) {
     assert(init != null);
     assert(phone != null);
     assert(verify != null);
     assert(profile != null);
-    return profile(this.profile);
+    return profile(this.profile, token);
   }
 
   @override
@@ -1129,12 +1149,12 @@ class _$AuthStateProfile implements AuthStateProfile {
     TResult init(),
     TResult phone(String phone),
     TResult verify(SignInVerify verify),
-    TResult profile(Profile profile),
+    TResult profile(Profile profile, String token),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (profile != null) {
-      return profile(this.profile);
+      return profile(this.profile, token);
     }
     return orElse();
   }
@@ -1171,10 +1191,13 @@ class _$AuthStateProfile implements AuthStateProfile {
   }
 }
 
-abstract class AuthStateProfile implements AuthState {
-  const factory AuthStateProfile(Profile profile) = _$AuthStateProfile;
+abstract class AuthStateProfile extends AuthState {
+  const AuthStateProfile._() : super._();
+  const factory AuthStateProfile(Profile profile, String token) =
+      _$AuthStateProfile;
 
   Profile get profile;
+  String get token;
   @JsonKey(ignore: true)
   $AuthStateProfileCopyWith<AuthStateProfile> get copyWith;
 }
