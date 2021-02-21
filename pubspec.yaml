@@ -17,6 +17,10 @@ dependencies:
   json_annotation: ^3.1.1
   location: ^3.2.4
   google_maps_flutter: ^1.2.0
+  google_polyline_algorithm: ^2.0.0
+  flinq: ^1.1.1
+  http: ^0.12.2
+  vector_math: ^2.0.8
   provider: ^4.3.3
   flutter_sound: ^7.7.0+1
   geodesy: ^0.3.2
