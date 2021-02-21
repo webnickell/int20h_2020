@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:int20h_2020/ui/bloc/auth/auth_bloc.dart';
 import 'package:int20h_2020/ui/design_system/app_buttons.dart';
 import 'package:int20h_2020/ui/design_system/app_colors.dart';
 import 'package:int20h_2020/ui/design_system/app_text_fields.dart';
@@ -14,23 +18,74 @@ class ConfirmPhonePage extends StatefulWidget {
 }
 
 class _ConfirmPhonePageState extends State<ConfirmPhonePage> {
-  final _seconds = 48;
-  final _phone = '+380987871090';
-
   final _codeEditingController = TextEditingController();
+  Timer _timer;
 
   bool _canSend = false;
+  bool _canResend = false;
+  int _seconds = 60;
 
-  void _onSend() {
-    if (_canSend) return;
+  @override
+  void initState() {
+    super.initState();
+    _codeEditingController.addListener(() {
+      setState(() {
+        _canSend = _codeEditingController.text.isNotEmpty;
+      });
+    });
+    _setTimer();
+  }
+
+  @override
+  void dispose() {
+    _codeEditingController.dispose();
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _setTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(
+      Duration(seconds: 1),
+      (timer) {
+        if (_seconds < 1) {
+          _timer?.cancel();
+          setState(() {
+            _canSend = true;
+          });
+        } else {
+          setState(() {
+            _seconds--;
+          });
+        }
+      },
+    );
+    setState(() {
+      _seconds = 60;
+    });
+  }
+
+  void _onResend() {
+    if (!_canResend) return;
+    context.read<AuthBloc>().add(AuthEvent.resendCode());
+    _setTimer();
   }
 
   void _onBackPressed() {
     Navigator.pop(context);
+    _timer?.cancel();
   }
 
   void _onNextPressed() {
+    if (!_canSend) return;
+
     Navigator.pushNamed(context, Routes.setFullname);
+    context.read<AuthBloc>().add(
+          AuthEvent.sendCode(
+            _codeEditingController.text,
+          ),
+        );
+    _timer?.cancel();
   }
 
   @override
@@ -49,10 +104,10 @@ class _ConfirmPhonePageState extends State<ConfirmPhonePage> {
                     onPressed: _onBackPressed,
                   ),
                   BasicButton(
-                    onPressed: _onSend,
+                    onPressed: _onResend,
                     text: 'ОТПРАВИТЬ ЕЩЕ РАЗ: $_seconds',
                     isWhite: true,
-                    isElevated: _canSend,
+                    isElevated: _seconds < 1,
                   ),
                 ],
               ),
@@ -66,11 +121,17 @@ class _ConfirmPhonePageState extends State<ConfirmPhonePage> {
                     ),
                   ),
                   AppGaps.gap8,
-                  Text(
-                    'СМС с кодом подтверждения отправлено на \n$_phone',
-                    style: AppTextStyles.body2.copyWith(
-                      color: AppColors.light,
-                    ),
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (ctx, state) => state.when(
+                        init: () => Container(),
+                        phone: (phone) => Text(
+                              'СМС с кодом подтверждения отправлено на \n$phone',
+                              style: AppTextStyles.body2.copyWith(
+                                color: AppColors.light,
+                              ),
+                            ),
+                        verify: (v) => Container(),
+                        profile: (p) => Container()),
                   ),
                   AppGaps.gap16,
                   Row(
@@ -83,6 +144,7 @@ class _ConfirmPhonePageState extends State<ConfirmPhonePage> {
                       BasicButton(
                         text: 'Дальше',
                         onPressed: _onNextPressed,
+                        isElevated: _canSend,
                       ),
                     ],
                   ),

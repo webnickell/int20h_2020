@@ -6,8 +6,8 @@ import 'package:retrofit/retrofit.dart';
 part 'locations_service.g.dart';
 
 @RestApi()
-abstract class AccountsService {
-  factory AccountsService(Dio dio, {String baseUrl}) = _AccountsService;
+abstract class LocationsService {
+  factory LocationsService(Dio dio, {String baseUrl}) = _LocationsService;
 
   @GET("/sign-in-request")
   Future<List<LocationAlias>> locations();

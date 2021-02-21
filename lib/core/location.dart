@@ -1,6 +1,6 @@
 import 'package:location/location.dart';
 
-getLocation() async {
+Future<Location> getLocation() async {
   Location location = new Location();
 
   bool _serviceEnabled;

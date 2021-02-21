@@ -6,8 +6,8 @@ part of 'locations_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-class _AccountsService implements AccountsService {
-  _AccountsService(this._dio, {this.baseUrl}) {
+class _LocationsService implements LocationsService {
+  _LocationsService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
   }
 

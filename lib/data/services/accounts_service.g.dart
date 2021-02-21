@@ -16,11 +16,11 @@ class _AccountsService implements AccountsService {
   String baseUrl;
 
   @override
-  Future<SignIn> signInRequest({id, phone}) async {
+  Future<SignIn> signInRequest({phone}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _data = id;
+    final _data = phone;
     final _result = await _dio.request<Map<String, dynamic>>('/sign-in-request',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -69,11 +69,11 @@ class _AccountsService implements AccountsService {
   }
 
   @override
-  Future<Profile> putProfile({email, fullName}) async {
+  Future<Profile> putProfile({fullName}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _data = email;
+    final _data = fullName;
     final _result = await _dio.request<Map<String, dynamic>>('/profile',
         queryParameters: queryParameters,
         options: RequestOptions(

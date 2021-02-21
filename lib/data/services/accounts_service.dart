@@ -12,7 +12,6 @@ abstract class AccountsService {
 
   @POST("/sign-in-request")
   Future<SignIn> signInRequest({
-    @Body() int id,
     @Body() String phone,
   });
 
@@ -27,7 +26,6 @@ abstract class AccountsService {
 
   @PUT("/profile")
   Future<Profile> putProfile({
-    @Body() String email,
     @Body() String fullName,
   });
 }

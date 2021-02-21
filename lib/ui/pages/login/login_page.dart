@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:int20h_2020/ui/bloc/auth/auth_bloc.dart';
 import 'package:int20h_2020/ui/design_system/app_buttons.dart';
 import 'package:int20h_2020/ui/design_system/app_colors.dart';
 import 'package:int20h_2020/ui/design_system/app_gaps.dart';
@@ -19,9 +21,33 @@ class _LoginPageState extends State<LoginPage> {
   final _phoneEditingController = TextEditingController();
 
   String _selectedPrefix = phonePrefixes.first;
+  bool _canSend = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _phoneEditingController.addListener(() {
+      final empty = _phoneEditingController.text.isEmpty;
+      setState(() {
+        _canSend = !empty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _phoneEditingController.dispose();
+    super.dispose();
+  }
 
   void _onNextPressed() {
+    if (!_canSend) return;
     Navigator.pushNamed(context, Routes.confirmPhone);
+    context.read<AuthBloc>().add(
+          AuthEvent.sendPhone(
+            _phoneEditingController.text,
+          ),
+        );
   }
 
   Widget get _dropdownButton => Expanded(
@@ -83,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                   BasicButton(
                     text: 'Дальше',
                     onPressed: _onNextPressed,
+                    isElevated: _canSend,
                   ),
                 ],
               ),

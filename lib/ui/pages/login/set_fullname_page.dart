@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:int20h_2020/ui/bloc/auth/auth_bloc.dart';
 import 'package:int20h_2020/ui/design_system/app_buttons.dart';
 import 'package:int20h_2020/ui/design_system/app_colors.dart';
 import 'package:int20h_2020/ui/design_system/app_gaps.dart';
@@ -15,9 +17,10 @@ class SetFullNamePage extends StatefulWidget {
 
 class _SetFullNamePageState extends State<SetFullNamePage> {
   final _fullnameEditingController = TextEditingController();
-  bool _hasBigButton = true;
-
   final _focusNode = FocusNode();
+
+  bool _hasBigButton = true;
+  bool _canNext = false;
 
   @override
   void initState() {
@@ -27,11 +30,18 @@ class _SetFullNamePageState extends State<SetFullNamePage> {
         _hasBigButton = !_focusNode.hasFocus;
       });
     });
+
+    _fullnameEditingController.addListener(() {
+      setState(() {
+        _canNext = _fullnameEditingController.text.isNotEmpty;
+      });
+    });
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
+    _fullnameEditingController.dispose();
     super.dispose();
   }
 
@@ -40,6 +50,12 @@ class _SetFullNamePageState extends State<SetFullNamePage> {
   }
 
   void _onNextPressed() {
+    if (!_canNext) return;
+    context.read<AuthBloc>().add(
+          AuthEvent.setFullname(
+            _fullnameEditingController.text,
+          ),
+        );
     Navigator.pushNamed(context, Routes.map);
   }
 
@@ -52,6 +68,7 @@ class _SetFullNamePageState extends State<SetFullNamePage> {
     final nextButton = BasicButton(
       onPressed: _onNextPressed,
       text: 'Дальше',
+      isElevated: _canNext,
     );
     return Scaffold(
       body: SafeArea(
