@@ -1,6 +1,11 @@
 import 'dart:async';
+import 'dart:io' as io;
+import 'package:dio/dio.dart';
+import 'package:int20h_2020/ui/bloc/map/map_bloc.dart';
+import 'package:path/path.dart' as path;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:int20h_2020/ui/design_system/app_buttons.dart';
@@ -10,6 +15,7 @@ import 'package:int20h_2020/ui/design_system/app_icons.dart';
 import 'package:int20h_2020/ui/design_system/app_nav_bar.dart';
 import 'package:int20h_2020/ui/design_system/app_text_fields.dart';
 import 'package:int20h_2020/ui/design_system/app_text_styles.dart';
+import 'package:provider/provider.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key}) : super(key: key);
@@ -33,14 +39,48 @@ class _MapPageState extends State<MapPage> {
   );
 
   final _fullName = 'Mykola Shevchenko';
-
   LatLng _selectedLocation;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _fromEditingController.dispose();
+    _toEditingController.dispose();
+    context.read<MapBloc>().add(MapEvent.endRecorder());
+    super.dispose();
+  }
 
   void _onMenuPressed() {
     _scaffoldKey.currentState.openDrawer();
   }
 
   void _onLocationPressed() {}
+
+  Widget get _recordButton => Container(
+        width: 36,
+        height: 36,
+        color: Colors.white,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: GestureDetector(
+          onTapDown: (details) {
+            context.read<MapBloc>().add(MapEvent.startRecorder());
+          },
+          onTapUp: (details) {
+            context.read<MapBloc>().add(MapEvent.endRecorder());
+          },
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: SvgPicture.asset(AppIcons.mic),
+          ),
+        ),
+      );
 
   Set<Marker> get _markers => _selectedLocation != null
       ? {
@@ -108,9 +148,12 @@ class _MapPageState extends State<MapPage> {
         onMapCreated: (GoogleMapController controller) {
           _googleMapController.complete(controller);
         },
-        onTap: (latLng) {
+        onTap: (location) {
+          context.read<MapBloc>().add(
+                MapEvent.setTargetLocation(location),
+              );
           setState(() {
-            _selectedLocation = latLng;
+            _selectedLocation = location;
           });
         },
         markers: _markers,

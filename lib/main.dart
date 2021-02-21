@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:int20h_2020/app.dart';
 import 'package:int20h_2020/core/location.dart';
+import 'package:int20h_2020/core/recorder.dart';
 import 'package:int20h_2020/data/services/accounts_service.dart';
 import 'package:int20h_2020/data/services/locations_service.dart';
 import 'package:provider/provider.dart';
@@ -55,6 +57,8 @@ void main() async {
 
   final location = await getLocation();
 
+  final recorder = await getRecorder();
+
   runApp(
     MultiProvider(
       providers: [
@@ -69,6 +73,9 @@ void main() async {
         ),
         Provider(
           create: (ctx) => LocationsService(ctx.read<Dio>()),
+        ),
+        Provider(
+          create: (ctx) => recorder,
         ),
       ],
       child: Int20hApp(),

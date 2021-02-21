@@ -11,4 +11,5 @@ class AppIcons {
   static final favorite = 'assets/icons/Favourite.svg';
   static final payment = 'assets/icons/Payment.svg';
   static final settings = 'assets/icons/Settings.svg';
+  static final mic = 'assets/icons/Mic.svg';
 }
